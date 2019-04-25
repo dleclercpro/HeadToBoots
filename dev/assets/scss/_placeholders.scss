@@ -1,0 +1,18 @@
+/***************************************************************************************************
+
+	Title : _placeholders.scss
+	Author : David Leclerc
+	Date : 12.12.2016
+	Notes : -
+
+***************************************************************************************************/
+
+%center {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+%square {
+	border-radius: 0;
+}

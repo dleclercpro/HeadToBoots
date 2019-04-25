@@ -1,0 +1,120 @@
+.mod-product {
+    $n-cols-tablet: 2;
+    $n-cols-desktop: 4;
+    $grid-spacing-tablet: 30px;
+    $grid-spacing-desktop: 50px;
+    position: relative;
+    width: 100%;
+    margin-bottom: 20px;
+    background-color: $color-white;
+
+    &--out-of-stock {
+
+        &:after {
+            content: 'Stock écoulé';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-weight: bold;
+            font-size: 28px;
+        }
+
+        > .m-wrapper-img {
+            opacity: 0.5;
+        }
+    }
+
+    @include mq(tablet) {
+        width: calc((100% - (#{$n-cols-tablet} - 1) * #{$grid-spacing-tablet}) / #{$n-cols-tablet});
+        margin-left: $grid-spacing-tablet;
+        margin-bottom: $grid-spacing-tablet;
+    }
+
+    @include mq(desktop) {
+        width: calc((100% - (#{$n-cols-desktop} - 1) * #{$grid-spacing-desktop}) / #{$n-cols-desktop});
+        margin-left: $grid-spacing-desktop;
+        margin-bottom: $grid-spacing-desktop;
+    }
+
+    &:nth-child(2n + 1) {
+
+        @include mq(tablet) {
+            margin-left: 0;
+        }
+
+        @include mq(desktop) {
+            margin-left: $grid-spacing-desktop;
+        }
+    }
+
+    &:nth-child(4n + 1) {
+
+        @include mq(desktop) {
+            margin-left: 0;
+        }
+    }
+
+    > .m-wrapper-img {
+        display: flex;
+        flex-direction: column;
+        position: relative;
+
+        > .m-img {
+            width: 100%;
+            height: auto;
+            cursor: pointer;
+
+            &--front {
+                position: absolute;
+                top: 0;
+                left: 0;
+                opacity: 1;
+                transition: opacity ease-in-out 250ms;
+
+                &:hover {
+
+                    // Hover effect only on desktops
+                    @include mq(desktop) {
+                        opacity: 0;
+                    }
+                }
+
+                // Simulate hover on mobile and tablet
+                &.is-hover {
+                    opacity: 0;
+                }
+            }
+
+            &--side {
+
+            }
+        }
+    }
+
+    > .m-info {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 15px 10px;
+
+        > .m-name {
+            margin-bottom: 5px;
+            font-size: 15px;
+            font-weight: 300;
+            text-align: center;
+
+            > .m-id {
+
+            }
+        }
+
+        > .m-price {
+            font-weight: 700;
+
+            > .m-currency {
+
+            }
+        }
+    }
+}

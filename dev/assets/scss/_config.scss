@@ -1,0 +1,29 @@
+// Breakpoints
+$breakpoints: (
+	"tablet": 520px,
+	"desktop": 1024px,
+    "desktop-xl": 1920px,
+);
+
+// Colors
+$color-black: #000000;
+$color-white: #ffffff;
+$color-grey: #f7f7f7;
+$color-turquoise: #70cfea;
+$color-red: #ff7376;
+$color-bg: $color-white;
+$color-font: $color-black;
+
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,700');
+
+// Font types
+$font-copy: 'Open Sans', sans-serif;
+
+// Font dictionary
+$fonts: (
+	"body": (size: (desktop: 24px, mobile: 18px), family: $font-copy, weight: bold, line-height: 1em)
+);
+
+// Sizes
+$max-width: 1920px;

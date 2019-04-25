@@ -1,0 +1,11 @@
+.mod-shop {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    padding: 40px 0;
+    background-color: $color-grey;
+
+    @include mq(tablet) {
+        padding: 130px 0;
+    }
+}

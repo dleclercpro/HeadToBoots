@@ -1,0 +1,80 @@
+.mod-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding: 40px 0;
+
+    @include mq(tablet) {
+        flex-direction: row;
+        justify-content: space-around;
+        padding: 70px 0;
+    }
+
+    > .m-logo {
+        width: 200px;
+        margin-bottom: 30px;
+
+        @include mq(tablet) {
+            margin-bottom: 0;
+        }
+    }
+
+    > .m-impressum {
+        font-size: 15px;
+        margin-bottom: 30px;
+
+        @include mq(tablet) {
+            margin-bottom: 0;
+        }
+
+        > strong {
+            font-weight: bold;
+        }
+
+        > .m-email,
+        > .m-phone {
+            transition: color ease-in-out 250ms;
+
+            &:hover {
+                color: $color-turquoise;
+            }
+        }
+    }
+
+    > .m-media {
+        display: flex;
+        
+        > .m-link {
+            display: block;
+
+            &:not(:last-child) {
+                margin-right: 10px;
+            }
+
+            > .m-logo {
+                width: 50px;
+                height: 50px;
+                cursor: pointer;
+                opacity: 1;
+                transition: opacity ease-in-out 250ms;
+
+                &:hover {
+                    opacity: 0.5;
+                }
+
+                &--facebook {
+
+                }
+
+                &--instagram {
+
+                }
+
+                &--youtube {
+
+                }
+            }
+        }
+    }
+}

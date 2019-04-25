@@ -1,0 +1,26 @@
+{
+  "name": "head-to-boots",
+  "version": "1.0.0",
+  "description": "Head To Boots",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "David Leclerc",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.3.4",
+    "@babel/preset-env": "^7.3.4",
+    "browser-sync": "^2.26.3",
+    "del": "^4.0.0",
+    "gulp": "^4.0.0",
+    "gulp-babel": "^8.0.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-connect-php": "^1.0.3",
+    "gulp-rename": "^1.4.0",
+    "gulp-sass": "^4.0.2",
+    "jquery": "^3.2.1",
+    "node-sass": "^4.11.0",
+    "webpack-stream": "^5.2.1"
+  }
+}

@@ -1,0 +1,251 @@
+/***************************************************************************************************
+
+	Title : _mixins.scss
+	Author : David Leclerc
+	Date : 12.12.2016
+	Notes : -
+
+***************************************************************************************************/
+
+// GENERAL MIXINS
+
+/***************************************************************************************************
+	MQ
+***************************************************************************************************/
+@mixin mq($type) {
+	
+	@media only screen and (min-width: map-get($breakpoints, $type)) {
+		@content;
+	}
+}
+
+/***************************************************************************************************
+	SIZE
+***************************************************************************************************/
+@mixin size($width: null, $height: null,
+			$tablet-width: null, $tablet-height: null,
+			$mobile-width: null, $mobile-height: null) {
+	width: $width;
+	height: $height;
+
+	@include mq(tablet) {
+		width: $tablet-width;
+		height: $tablet-height;
+	}
+
+	@include mq(mobile) {
+		width: $mobile-width;
+		height: $mobile-height;
+	}
+}
+
+/***************************************************************************************************
+	POSITION
+***************************************************************************************************/
+@mixin position($position,
+				$top: null, $right: null, $bottom: null, $left: null) {
+  position: $position;
+  top: $top;
+  right: $right;
+  bottom: $bottom;
+  left: $left;
+}
+
+@mixin absolute($args...) {
+	@include position(absolute, $args...);
+}
+
+@mixin relative($args...) {
+	@include position(relative, $args...);
+}
+
+@mixin fixed($args...) {
+	@include position(fixed, $args...);
+}
+
+/***************************************************************************************************
+	FONT
+***************************************************************************************************/
+@mixin font($font) {
+
+	// Get font from config file
+	$font: map-get($fonts, $font);
+
+	// Set font-family
+	@if map-has-key($font, family) {
+		font-family: map-get($font, family);
+	}
+
+	// Set font-size
+	@if map-has-key($font, size) {
+		$size: map-get($font, size);
+
+		// Deal with MQ
+		@if type-of($size) == "map" {
+
+			@if map-has-key($size, desktop) {
+				font-size: map-get($size, desktop)
+			}
+
+			@if map-has-key($size, tablet) {
+				@include mq(tablet) {
+					font-size: map-get($size, tablet)
+				}
+			}
+
+			@if map-has-key($size, mobile) {
+				@include mq(mobile) {
+					font-size: map-get($size, mobile)
+				}
+			}
+		}
+
+		@else {
+			font-size: $size;
+		}
+	}
+
+	// Set font-weight
+	@if map-has-key($font, weight) {
+		$weight: map-get($font, weight);
+
+		// Deal with MQ
+		@if type-of($weight) == "map" {
+
+			@if map-has-key($weight, desktop) {
+				font-weight: map-get($weight, desktop)
+			}
+
+			@if map-has-key($weight, tablet) {
+				@include mq(tablet) {
+					font-weight: map-get($weight, tablet)
+				}
+			}
+
+			@if map-has-key($weight, mobile) {
+				@include mq(mobile) {
+					font-weight: map-get($weight, mobile)
+				}
+			}
+		}
+
+		@else {
+			font-weight: $weight;
+		}
+	}
+
+	// Set line-height
+	@if map-has-key($font, line-height) {
+		$line-height: map-get($font, line-height);
+
+		// Deal with MQ
+		@if type-of($line-height) == "map" {
+
+			@if map-has-key($line-height, desktop) {
+				line-height: map-get($line-height, desktop)
+			}
+
+			@if map-has-key($line-height, tablet) {
+				@include mq(tablet) {
+					line-height: map-get($line-height, tablet)
+				}
+			}
+
+			@if map-has-key($line-height, mobile) {
+				@include mq(mobile) {
+					line-height: map-get($line-height, mobile)
+				}
+			}
+		}
+		@else {
+			line-height: $line-height;
+		}
+	}
+
+	// Set color
+	@if map-has-key($font, color) {
+		color: map-get($font, color);
+	}
+}
+
+
+
+// CUSTOM MIXINS
+
+/***************************************************************************************************
+	BACKGROUND
+***************************************************************************************************/
+@mixin background($color: null, $degree: null) {
+	background-color: $color;
+
+	@if $degree {
+		&:hover {
+			background-color: darken($color, $degree);
+		}
+	}
+}
+
+/***************************************************************************************************
+	BOX
+***************************************************************************************************/
+@mixin box($color, $border-radius, $shadow-radius) {
+	display: flex;
+	flex: none;
+	border: none;
+	border-radius: $border-radius;
+	background-color: $color;
+	box-shadow: $shadow-radius $shadow-radius $shadow-radius $color;
+}
+
+/***************************************************************************************************
+	BUTTON
+***************************************************************************************************/
+@mixin button($color, $hover-color, $border-radius, $shadow-radius) {
+	@include font("button");
+	margin: 0;
+	padding: 0;
+	border-radius: $border-radius;
+	border: none;
+	background-color: $color;
+	color: $hover-color;
+
+	&:hover, &:active {
+		background-color: $hover-color;
+		color: $color;
+	}
+
+	&:hover {
+		cursor: pointer;
+	}
+
+	&:active {
+		box-shadow: inset $shadow-radius $shadow-radius $shadow-radius $black;
+		padding-left: 6px;
+	}
+}
+
+/***************************************************************************************************
+	GRAPH
+***************************************************************************************************/
+@mixin graph($w, $h) {
+
+	> .mod-axis.x {
+		width: calc(100% - #{$w});
+		height: $h;
+	}
+
+	> .mod-axis.y {
+		width: $w;
+		height: calc(100% - #{$h});
+	}
+
+	> .mod-inner {
+		width: calc(100% - #{$w});
+		height: calc(100% - #{$h});
+	}
+
+	> .mod-corner {
+		width: $w;
+		height: $h;
+	}
+}
